@@ -55,7 +55,14 @@ var 비동기콜백 = function (e) {
     }
     //다 찼으면
     if (다참) {
-      console.log(턴 + "승리");
+      alert(턴 + "님이 승리하였습니다");
+      턴 = "X";
+      //모든값들을 빈칸으로 변경 초기화
+      칸들.forEach(function (줄) {
+        줄.forEach(function (칸) {
+          칸.textContent = "";
+        });
+      });
     } else {
       if (턴 === "X") {
         턴 = "O";
