@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+    <style>
+      /* 화면의 크기  */
+      #screen{
+        width: 80%;
+        height: 600px;
+        text-align: center;
+        user-select: none;
+      }
+      /*시작할때 초기 배경색  아쿠아색*/
+      #screen.waiting{
+        background-color:aqua;
+      }
+      /* 준비기간때 배경색 빨간색 */
+      #screen.ready{
+        background-color: red;
+        color: white;
+      }
+      /* 클릭해야하는 하면 노란색 */
+      #screen.now{
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="screen" class="waiting">클릭시 시작합니다.</div>
+    <div id="score"></div>
+    <div id="avg"></div>
+    <script src="reaction rate.js"></script>
+  </body>
+</html>
