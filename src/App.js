@@ -1,44 +1,61 @@
-import { useState, useRef } from "react";
+import React, { Component } from "react";
 
-const App = () => {
-  const [word, setWord] = useState("박수진");
-  const [value, setValue] = useState("");
-  const [result, setResult] = useState("");
-  const inputRef = useRef(null);
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (word[word.length - 1] === value[0]) {
-      setResult("딩동댕");
-      setWord(value);
-      setValue("");
-      inputRef.current.focus();
-    } else {
-      setResult("땡");
-      setValue("");
-      inputRef.current.focus();
-    }
+class App extends Component {
+  state = {
+    number: 0,
   };
 
-  const onChange = (e) => {
-    setValue(e.currentTarget.value);
+  constructor(props) {
+    super(props);
+    console.log("constructor");
+  }
+
+  componentWillMount() {
+    console.log("componentWillMount (deprecated)");
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount");
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // 5 의 배수라면 리렌더링 하지 않음
+    console.log("shouldComponentUpdate");
+    if (nextState.number % 5 === 0) return false;
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log("componentWillUpdate");
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("componentDidUpdate");
+  }
+
+  handleIncrease = () => {
+    const { number } = this.state;
+    this.setState({
+      number: number + 1,
+    });
   };
 
-  return (
-    <div>
-      <div>{word}</div>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="wordInput">글자를 입력</label>
-        <input
-          id="wordInput"
-          ref={inputRef}
-          value={value}
-          onChange={onChange}
-        />
-        <button>클릭</button>
-      </form>
-      <div>{result}</div>
-    </div>
-  );
-};
+  handleDecrease = () => {
+    this.setState(({ number }) => ({
+      number: number - 1,
+    }));
+  };
+
+  render() {
+    console.log("render");
+    return (
+      <div>
+        <h1>카운터</h1>
+        <div>값: {this.state.number}</div>
+        <button onClick={this.handleIncrease}>+</button>
+        <button onClick={this.handleDecrease}>-</button>
+      </div>
+    );
+  }
+}
 export default App;
