@@ -1,61 +1,36 @@
-import React, { Component } from "react";
+import { useState } from "react";
+import Customer from "./components/Try";
 
-class App extends Component {
-  state = {
-    number: 0,
-  };
-
-  constructor(props) {
-    super(props);
-    console.log("constructor");
-  }
-
-  componentWillMount() {
-    console.log("componentWillMount (deprecated)");
-  }
-
-  componentDidMount() {
-    console.log("componentDidMount");
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    // 5 의 배수라면 리렌더링 하지 않음
-    console.log("shouldComponentUpdate");
-    if (nextState.number % 5 === 0) return false;
-    return true;
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    console.log("componentWillUpdate");
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log("componentDidUpdate");
-  }
-
-  handleIncrease = () => {
-    const { number } = this.state;
-    this.setState({
-      number: number + 1,
-    });
-  };
-
-  handleDecrease = () => {
-    this.setState(({ number }) => ({
-      number: number - 1,
-    }));
-  };
-
-  render() {
-    console.log("render");
-    return (
-      <div>
-        <h1>카운터</h1>
-        <div>값: {this.state.number}</div>
-        <button onClick={this.handleIncrease}>+</button>
-        <button onClick={this.handleDecrease}>-</button>
-      </div>
-    );
+function getNumbers() {
+  const candidate = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const array = [];
+  for (let i = 0; i < 4; i++) {
+    const chosen = candidate.splice(Math.floor(Math.random() * (9 - i)), 1)[0];
   }
 }
+
+const App = () => {
+  const [result, setResult] = useState("");
+  const [value, setValue] = useState("");
+  const [answer, setAnswer] = useState(getNumbers());
+  const [tries, setTries] = useState("[]");
+
+  //화살표함수는 bind를 자동화해줍니다.
+  const onsubmit = (e) => {
+    e.preventDefault();
+    if (value === answer.join("")) {
+      setResult("홈런!");
+      setTries: [...tries, { try: value, result: "홈런!" }];
+    } else {
+    }
+    console.log(value);
+  };
+
+  const onchange = (e) => {
+    setValue(value);
+  };
+
+  return <></>;
+};
+
 export default App;
